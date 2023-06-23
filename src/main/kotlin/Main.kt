@@ -54,22 +54,31 @@ fun main() {
     println("13. in 키워드")
 
     val percent = 35
-    println(percent in 1 .. 20)
-    println(percent in 1 .. 36)
+    println(percent in 1..20)
+    println(percent in 1..36)
 
     // for 루프 제어식에 있는 in만 이터레이션을 뜻한다.
     // 나머지 in은 모두 원소인지 여부를 검사하는 in이다.
 
     val b = 1..3
-    for(i in b){
+    for (i in b) {
         print("$i")
     }
     println()
     println(2 in b)
     println(4 in b)
 
-    //Todo 14. 식과 문
-    //문은 상태를 변경
-    //식은 값을 짜낸다.
+
+    println()
+    println()
+    //25. 가변 인자 목록
+    val aa = listOf(1)
+    println(aa)
+
+    fun v(s: String, vararg d: Double) {}
+    v("Abc", 1.0, 2.0)
+    v("Abc", 1.0, 2.0, 3.0)
+    v("Abc", 1.0, 2.0, 4.0, 5.0, 6.90)
+
 
 }
