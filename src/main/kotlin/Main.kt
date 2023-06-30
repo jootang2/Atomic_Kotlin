@@ -14,6 +14,30 @@ var spiralArray = Array(m) { IntArray(n) }
 var flag = true
 var count = 0
 
+fun main() {
+    val sc = Scanner(System.`in`)
+    // m : 행의 수
+    m = sc.nextInt()
+    // n : 열의 수
+    n = sc.nextInt()
+    // spiralList 초기화
+    spiralArray = Array(m) { IntArray(n) }
+
+    //flag가 false : 모든 배열의 값이 채워질 때 까지 반복
+    while (flag) {
+        //시작점
+        goRight(0, 0)
+    }
+
+    // spiralArray 출력
+    for (row in spiralArray) {
+        for (i in row) {
+            print("$i  ")
+        }
+        println()
+    }
+}
+
 //오른족으로 이동하는 함수
 fun goRight(x: Int, y: Int) {
     // 배열을 벗어나거나, 이미 채워진 값이 있는 경우
@@ -102,26 +126,3 @@ fun goUp(x: Int, y: Int) {
     }
 }
 
-fun main() {
-    val sc = Scanner(System.`in`)
-    // m : 행의 수
-    m = sc.nextInt()
-    // n : 열의 수
-    n = sc.nextInt()
-    // spiralList 초기화
-    spiralArray = Array(m) { IntArray(n) }
-
-    //flag가 false : 모든 배열의 값이 채워질 때 까지 반복
-    while (flag) {
-        //시작점
-        goRight(0, 0)
-    }
-
-    // spiralArray 출력
-    for (row in spiralArray) {
-        for (element in row) {
-            print("$element")
-        }
-        println()
-    }
-}
