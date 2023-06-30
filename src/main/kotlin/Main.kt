@@ -1,84 +1,50 @@
+import java.util.*
+
 fun main() {
-    /**
-     * 12. 루프와 범위
-     */
-    fun showRange(r: IntProgression) {
-        for (i in r) {
-            print("$i ")
+    val sc = Scanner(System.`in`)
+    // 보드의 행 개수
+    val m = sc.nextInt()
+    // 보드의 열 개수
+    val n = sc.nextInt()
+    // 보드
+    val board = Array(m) {CharArray(n)}
+    // 입력 값을 보드에 할당
+    for(i in 0 until m){
+        val colors = sc.next()
+        for(j in 0 until n){
+            board[i][j] = colors[j]
         }
-        println(" // $r")
-        println()
     }
-
-    showRange(1..5)
-    showRange(1 until 5)
-    showRange(5 downTo 1)
-    showRange(0..5 step 2)
-    showRange(0 until 5 step 2)
-    showRange(10 downTo 2 step 2)
-
-    for (i in 'a'..'z') {
-        print("$i")
-    }
-
-    println()
-
-    val a = "abcd"
-    for (i in 0..a.lastIndex) {
-        print(a[i] + 1)
-    }
-
-    println()
-
-    val ch: Char = 'a'
-    println(ch + 25)
-    println(ch + 25 < 'z')
-    println('y' < 'z')
-
-    println()
-
-    fun hasChar(s: String, c: Char): Boolean {
-        for (i in s) {
-            if (i == c) return true
+    // 최솟값 초기화
+    var minCount = Int.MAX_VALUE
+    // 0 ~ 돌면서 바꿔야 하는 횟수 확인
+    for(i in 0 .. m-8){
+        for(j in 0 .. n-8){
+            minCount = minOf(minCount , countBoard(board, i , j))
         }
-        return false
+    }
+    // 최솟값 출력
+    println(minCount)
+}
+
+fun countBoard(board : Array<CharArray>, x : Int, y:Int) : Int{
+    // 시작할 수 있는 색 배열
+    val startColors = arrayOf('W', 'B')
+    // W로 시작하는 체스판인 경우
+    var count1 = 0
+    // B로 시작하는 체스판인 경우
+    var count2 = 0
+
+    for(i in 0 until 8){
+        for(j in 0 until 8){
+            if(board[x+i][y+j] != startColors[(i + j) % 2]){
+                count1 ++
+            }
+            if(board[x+i][y+j] != startColors[(i + j + 1) % 2]){
+                count2 ++
+            }
+        }
     }
 
-    println(hasChar("abc", 'c'))
-    println(hasChar("abc", 'z'))
-
-    /**
-     * 13. in 키워드
-     */
-    println()
-    println("13. in 키워드")
-
-    val percent = 35
-    println(percent in 1..20)
-    println(percent in 1..36)
-
-    // for 루프 제어식에 있는 in만 이터레이션을 뜻한다.
-    // 나머지 in은 모두 원소인지 여부를 검사하는 in이다.
-
-    val b = 1..3
-    for (i in b) {
-        print("$i")
-    }
-    println()
-    println(2 in b)
-    println(4 in b)
-
-
-    println()
-    println()
-    //25. 가변 인자 목록
-    val aa = listOf(1)
-    println(aa)
-
-    fun v(s: String, vararg d: Double) {}
-    v("Abc", 1.0, 2.0)
-    v("Abc", 1.0, 2.0, 3.0)
-    v("Abc", 1.0, 2.0, 4.0, 5.0, 6.90)
-
-
+    return(minOf(count1, count2))
 }
